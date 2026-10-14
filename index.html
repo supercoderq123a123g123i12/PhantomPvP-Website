@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PhantomPvP — Competitive Minecraft PvP</title>
+  <meta name="description" content="PhantomPvP competitive duels network. Leaderboards, ranked tiers, official client & launcher, limited Beta cloak." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-pill">
+        <span class="brand-text">PHANTOM<span>PVP</span></span>
+      </div>
+      <nav class="nav-icons">
+        <a href="#" data-page="home" class="active" title="Home">Home</a>
+        <a href="#" data-page="leaderboard" title="Leaderboard">Ranks</a>
+        <a href="#" data-page="client" title="Client">Client</a>
+        <a href="#" data-page="profile" title="Profile">Profile</a>
+      </nav>
+      <div class="user-row">
+        <strong id="navUser">Guest</strong>
+      </div>
+    </div>
+  </header>
+
+  <div class="search-wrap">
+    <input class="search-box" id="globalSearch" type="search" placeholder="Search player…" autocomplete="off" />
+  </div>
+
+  <main>
+    <section id="page-home" class="page active">
+      <h2 class="section-title">Top Players</h2>
+      <div class="podium" id="podium"><div class="empty">Loading leaderboard…</div></div>
+      <div class="lb-list" id="homeRest"></div>
+
+      <div class="cloak-card" id="cloakCard">
+        <div class="cloak-preview">
+          <img src="assets/cloak-preview.svg" alt="PhantomPvP Beta Cloak" />
+        </div>
+        <div class="cloak-body">
+          <div class="cloak-badge">LIMITED TIME</div>
+          <h2>Beta Release Cloak</h2>
+          <p>Get a free, limited time, PhantomPvP cloak to celebrate Beta! Redeem it in the launcher soon, before it's gone.</p>
+          <button class="btn-claim" type="button" id="btnClaimCloak">Claim Phantom Cloak</button>
+        </div>
+      </div>
+
+      <div class="partner-banner" style="margin-top:1.5rem">
+        <span>PHANTOM</span>
+        <span style="opacity:0.7">×</span>
+        <span style="color:#fff">CLIENT</span>
+      </div>
+      <div class="download-row">
+        <a class="btn-download" id="homeDownload" href="#">Download Launcher</a>
+      </div>
+    </section>
+
+    <section id="page-leaderboard" class="page">
+      <h2 class="section-title">Leaderboard</h2>
+      <div class="kit-tabs" id="kitTabs">
+        <button class="kit-tab active" data-kit="">Overall</button>
+      </div>
+      <div class="lb-full" id="fullLb"><div class="empty">Loading…</div></div>
+    </section>
+
+    <section id="page-client" class="page">
+      <div class="client-hero">
+        <div class="partner-banner">
+          <span>PHANTOM</span>
+          <span style="opacity:0.7">×</span>
+          <span>LAUNCHER</span>
+        </div>
+        <h1>The Official<br/><span>PhantomPvP</span> Client</h1>
+        <div class="download-row">
+          <a class="btn-download" id="clientDownload" href="#">Download for Windows</a>
+          <button class="btn-dd" type="button" id="platformMenu" title="Other platforms">▾</button>
+        </div>
+        <div class="kit-tabs hidden" id="platformList" style="justify-content:center"></div>
+      </div>
+      <div id="featureCarousel"></div>
+      <div class="feature-card">
+        <div class="feature-visual">★</div>
+        <h2>Beta Access</h2>
+        <p>Get immediate Beta Access to the PhantomPvP network through an automatic whitelist for Phantom Client players. Warm up before the tournaments start flowing.</p>
+      </div>
+      <div class="cloak-card">
+        <div class="cloak-preview"><img src="assets/cloak-preview.svg" alt="Cloak" /></div>
+        <div class="cloak-body">
+          <div class="cloak-badge">LIMITED TIME</div>
+          <h2>Beta Release Cloak</h2>
+          <p>Custom PhantomPvP logo cloak. Claim free during Beta — redeem in the launcher.</p>
+          <button class="btn-claim" type="button" id="btnClaimCloak2">Claim Phantom Cloak</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="page-profile" class="page">
+      <div class="profile-header">
+        <div class="profile-skin-wrap"><img id="profileBody" src="" alt="" /></div>
+        <div class="profile-name" id="profileName">—</div>
+        <div class="muted" id="profileSub">Search a player above</div>
+      </div>
+      <div class="profile-tabs">
+        <button type="button" class="active" data-tab="general">General</button>
+        <button type="button" data-tab="stats">Stats</button>
+        <button type="button" data-tab="history">Match History</button>
+      </div>
+      <div id="tab-general">
+        <div class="kit-selector" id="profileKits"></div>
+        <div class="stat-card">
+          <h3>Match Record</h3>
+          <div class="stat-grid">
+            <div><div class="val" id="pWins">—</div><div class="lbl">Wins</div></div>
+            <div><div class="val" id="pLosses">—</div><div class="lbl">Losses</div></div>
+            <div><div class="val green" id="pWinRate">—</div><div class="lbl">Win rate</div></div>
+          </div>
+          <div class="progress"><span id="pWinBar" style="width:0%"></span></div>
+        </div>
+        <div class="stat-card">
+          <h3>Combat</h3>
+          <div class="stat-row"><span class="k">Kill/death ratio</span><span class="v" id="pKdr">—</span></div>
+          <div class="stat-row"><span class="k">Kills</span><span class="v" id="pKills">—</span></div>
+          <div class="stat-row"><span class="k">Deaths</span><span class="v" id="pDeaths">—</span></div>
+        </div>
+        <div class="stat-card">
+          <h3>Win Streaks</h3>
+          <div class="stat-row"><span class="k">Current streak</span><span class="v" id="pStreak">—</span></div>
+          <div class="stat-row"><span class="k">Best streak</span><span class="v" id="pBest">—</span></div>
+        </div>
+      </div>
+      <div id="tab-stats" class="hidden">
+        <div class="stat-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
+            <span class="muted">Tier <strong id="pTier" style="color:var(--green)">—</strong></span>
+            <span class="muted">Rank <strong id="pRank">—</strong></span>
+          </div>
+          <h3>Skill Rating</h3>
+          <div class="big-pct" id="pSkill">—</div>
+          <div class="progress"><span id="pSkillBar" style="width:0%"></span></div>
+          <p class="muted" style="margin-top:0.5rem;font-size:0.85rem">Rating <span id="pPoints">—</span></p>
+        </div>
+        <div class="stat-card">
+          <h3>Confidence</h3>
+          <div class="big-pct" id="pConf">—</div>
+          <div class="progress"><span id="pConfBar" style="width:0%"></span></div>
+          <p class="muted" style="margin-top:0.5rem;font-size:0.85rem" id="pConfMeta">—</p>
+        </div>
+        <div class="stat-card">
+          <h3>Overall Ranking</h3>
+          <p class="muted" style="font-size:0.85rem">Points: <strong id="pPoints2">—</strong> · Tier: <strong id="pTier2">—</strong></p>
+          <p class="muted" style="margin-top:0.75rem;font-size:0.8rem" id="pUuid">UUID: —</p>
+        </div>
+      </div>
+      <div id="tab-history" class="hidden">
+        <div class="stat-card">
+          <h3>Recent Matches</h3>
+          <div id="matchHistory" class="empty">No matches yet.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    PhantomPvP · Live data from your duels plugin<br/>
+    API: <code id="apiDisplay">—</code>
+    <button type="button" id="btnApi" style="margin-left:0.5rem;background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:0.2rem 0.5rem;font-size:0.75rem">Change</button>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
